@@ -1,0 +1,151 @@
+---
+import Root from "@/layouts/Layout.astro";
+import ServerCard from "@/components/server-card";
+import { Search, Compass, TrendingUp } from "lucide-react";
+
+const featuredServers = [
+  {
+    id: "1",
+    name: "Gaming Hub",
+    description: "The ultimate gaming community for all platforms. Join daily tournaments, find teammates, and share your gaming moments!",
+    memberCount: 50000,
+    rating: 4.8,
+    tags: ["Gaming", "Esports", "Community"],
+    iconUrl: "https://picsum.photos/200",
+    bannerUrl: "https://picsum.photos/800/400"
+  },
+  {
+    id: "2",
+    name: "Developers United",
+    description: "A place for developers to connect, share knowledge, and collaborate on projects. Regular code reviews and hackathons!",
+    memberCount: 25000,
+    rating: 4.9,
+    tags: ["Programming", "Tech", "Learning"],
+    iconUrl: "https://picsum.photos/201",
+    bannerUrl: "https://picsum.photos/800/401"
+  },
+  {
+    id: "3",
+    name: "Creative Corner",
+    description: "Share your art, get feedback, and connect with other artists. Daily challenges and monthly exhibitions!",
+    memberCount: 35000,
+    rating: 4.7,
+    tags: ["Art", "Design", "Creative"],
+    iconUrl: "https://picsum.photos/202",
+    bannerUrl: "https://picsum.photos/800/402"
+  }
+];
+---
+
+<Root
+  title="Discord Server List - Find Your Next Community"
+  description="Discover the best Discord servers for gaming, development, art, and more. Join thriving communities today!"
+>
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative h-[600px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-background/50 via-background to-background z-10"></div>
+      <div class="absolute inset-0">
+        <video
+          class="w-full h-full object-cover opacity-30"
+          autoplay
+          loop
+          muted
+          playsinline
+        >
+          <source
+            src="https://cdn.discordapp.com/attachments/1094892175786967133/1172475689174437918/Discord_Background_Video.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+      
+      <div class="relative z-20 container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Find Your Perfect Discord Community
+        </h1>
+        <p class="text-xl md:text-2xl text-muted-foreground mb-8">
+          Join millions of users in the best Discord servers for gaming, art, development, and more
+        </p>
+        
+        <div class="flex items-center max-w-2xl mx-auto bg-card rounded-lg p-2">
+          <Search className="w-6 h-6 text-muted-foreground ml-2" />
+          <input
+            type="text"
+            placeholder="Search servers..."
+            class="flex-1 bg-transparent border-none focus:outline-none text-foreground px-4 py-2"
+          />
+          <button class="btn-primary px-6 py-2 rounded-md bg-primary text-foreground hover:bg-accent">
+            Search
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Servers Section -->
+    <section class="container mx-auto px-4 py-16">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold flex items-center">
+          <TrendingUp className="w-8 h-8 text-secondary mr-2" />
+          Featured Servers
+        </h2>
+        <a
+          href="/servers"
+          class="flex items-center text-secondary hover:text-accent transition-colors"
+        >
+          <span class="mr-2">Explore More</span>
+          <Compass className="w-5 h-5" />
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredServers.map(server => (
+          <ServerCard server={server} client:load />
+        ))}
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="bg-card py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-center">Popular Categories</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            "Gaming",
+            "Development",
+            "Art & Design",
+            "Music",
+            "Education",
+            "Technology",
+            "Entertainment",
+            "Community"
+          ].map(category => (
+            <a
+              href={`/servers/category/${category.toLowerCase()}`}
+              class="group relative overflow-hidden rounded-lg aspect-square flex items-center justify-center p-4 bg-background border border-muted/20 hover:border-secondary transition-colors"
+            >
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <span class="text-xl font-semibold text-center z-10">{category}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="container mx-auto px-4 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { number: "1M+", label: "Active Users" },
+          { number: "10K+", label: "Servers Listed" },
+          { number: "500K+", label: "Daily Messages" }
+        ].map(stat => (
+          <div class="text-center">
+            <h3 class="text-4xl font-bold text-primary mb-2">{stat.number}</h3>
+            <p class="text-muted-foreground">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Root>
